@@ -1,3 +1,33 @@
+import numpy as np
+
+def selemline(length, theta, dtype=np.uint8):
+
+    """Calculates linear structuring element.
+    Linear stucturing element is used in calc_msi and calc_mbi functions
+
+    Parameters
+    ------------
+    length: numerical (integer) input
+    theta: numerical (integer) input for angle of structuring element
+
+    Returns
+    ------------
+    Structuring element of a specified length and angle
+    Data type is an integer
+    """
+    import numpy as np
+    from skimage import draw
+
+    theta_d = theta * np.pi / 180
+    X = int(round((length-1)/2. * np.cos(theta_d)))
+    Y = int(-round((length-1)/2. * np.sin(theta_d)))
+    C, R, V = draw.line_aa(-X, -Y, X, Y)
+    M = 2*max(abs(R)) + 1
+    N = 2*max(abs(C)) + 1
+    selem = np.zeros((M, N)).astype(dtype)
+    selem[R + max(abs(R)), C + max(abs(C))] = 1
+    return selem
+
 def calc_msi(raster_input, s_min, s_max, s_delta):
 
     """ Calculates morphological shadow index (MSI) per Huang et al. (2015)
@@ -22,18 +52,19 @@ def calc_msi(raster_input, s_min, s_max, s_delta):
     from skimage.morphology import black_tophat
     from skimage import draw
 
-    # Function for calculating the linear structuring element
-    def selemline(length, theta, dtype=np.uint8):
-        """Line structuring element"""
-        theta_d = theta * np.pi / 180
-        X = int(round((length-1)/2. * np.cos(theta_d)))
-        Y = int(-round((length-1)/2. * np.sin(theta_d)))
-        C, R, V = draw.line_aa(-X, -Y, X, Y)
-        M = 2*max(abs(R)) + 1
-        N = 2*max(abs(C)) + 1
-        selem = np.zeros((M, N)).astype(dtype)
-        selem[R + max(abs(R)), C + max(abs(C))] = 1
-        return selem
+    # # Function for calculating the linear structuring element
+    # def selemline(length, theta, dtype=np.uint8):
+    #     """Line structuring element"""
+    #     theta_d = theta * np.pi / 180
+    #     X = int(round((length-1)/2. * np.cos(theta_d)))
+    #     Y = int(-round((length-1)/2. * np.sin(theta_d)))
+    #     C, R, V = draw.line_aa(-X, -Y, X, Y)
+    #     M = 2*max(abs(R)) + 1
+    #     N = 2*max(abs(C)) + 1
+    #     selem = np.zeros((M, N)).astype(dtype)
+    #     selem[R + max(abs(R)), C + max(abs(C))] = 1
+    #     return selem
+
 
     # Calculate brightness for cloud masked stack
     brightness=np.nanmax(raster_input, axis=0)
@@ -84,18 +115,18 @@ def calc_mbi(raster_input, s_min, s_max, s_delta):
     from skimage.morphology import white_tophat
     from skimage import draw
 
-    # Function for calculating the linear structuring element
-    def selemline(length, theta, dtype=np.uint8):
-        """Line structuring element"""
-        theta_d = theta * np.pi / 180
-        X = int(round((length-1)/2. * np.cos(theta_d)))
-        Y = int(-round((length-1)/2. * np.sin(theta_d)))
-        C, R, V = draw.line_aa(-X, -Y, X, Y)
-        M = 2*max(abs(R)) + 1
-        N = 2*max(abs(C)) + 1
-        selem = np.zeros((M, N)).astype(dtype)
-        selem[R + max(abs(R)), C + max(abs(C))] = 1
-        return selem
+    # # Function for calculating the linear structuring element
+    # def selemline(length, theta, dtype=np.uint8):
+    #     """Line structuring element"""
+    #     theta_d = theta * np.pi / 180
+    #     X = int(round((length-1)/2. * np.cos(theta_d)))
+    #     Y = int(-round((length-1)/2. * np.sin(theta_d)))
+    #     C, R, V = draw.line_aa(-X, -Y, X, Y)
+    #     M = 2*max(abs(R)) + 1
+    #     N = 2*max(abs(C)) + 1
+    #     selem = np.zeros((M, N)).astype(dtype)
+    #     selem[R + max(abs(R)), C + max(abs(C))] = 1
+    #     return selem
 
     # Calculate brightness for cloud masked stack
     brightness=np.nanmax(raster_input, axis=0)
