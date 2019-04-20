@@ -1,6 +1,12 @@
 ### JupyterNotebook ###
-.ipynb_checkpoints
+
 */.ipynb_checkpoints/*
+*/working_versions_old_notebooks/*
+*/__pycache__/*
+*/copies_for_backup/*
+*/holding/*
+*/old_notebooks/*
+data
 
 # Created by https://www.gitignore.io/api/windows
 # Edit at https://www.gitignore.io/?templates=windows

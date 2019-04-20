@@ -70,7 +70,8 @@ def calc_msi(raster_input, s_min, s_max, s_delta):
     brightness=np.nanmax(raster_input, axis=0)
 
     # Cap brightness values at a max of 1. Replace all values greater than 1 with a value of 1
-    brightness_cap=np.ma.where(brightness>1,1,brightness)
+    # brightness_cap=np.ma.where(brightness>1,1,brightness)
+    brightness_cap=np.where(brightness>1,1,brightness)
 
     # Initialize inputs for MSI calculation
     selem = selemline(0,0)
@@ -132,7 +133,7 @@ def calc_mbi(raster_input, s_min, s_max, s_delta):
     brightness=np.nanmax(raster_input, axis=0)
 
     # Cap brightness values at a max of 1. Replace all values greater than 1 with a value of 1
-    brightness_cap=np.ma.where(brightness>1,1,brightness)
+    brightness_cap=np.where(brightness>1,1,brightness)
 
     # Initialize inputs for MBI calculation
     selem = selemline(0,0)
