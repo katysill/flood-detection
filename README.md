@@ -1,8 +1,8 @@
 # Flood detection workflow
 
-This repository is for a research project focused on differentiating building shadow from flood waters in urban settings during flooding events. The workflow is motivated by the challenges in rapidly and accurately assessing flooding extent utilizing high resolution remote sensing imagery, as shadows from buildings look spectrally similar to water. The workflow utilizes packages from NumPy, Matplotlib, scikit-image, scikit-learn, RasterIO, and EarthPy. THe workbook was developed using the [earth-analytics-python environment](https://github.com/earthlab/earth-analytics-python-env)
+This repository is for a research project focused on differentiating building shadow from flood waters in urban settings during flooding events. The workflow is motivated by the challenges in rapidly and accurately assessing flooding extent utilizing high resolution remote sensing imagery, as shadows from buildings look spectrally similar to water. The workflow utilizes packages from NumPy, Matplotlib, scikit-image, scikit-learn, RasterIO, and EarthPy. The workbook was developed using the [earth-analytics-python environment](https://github.com/earthlab/earth-analytics-python-env)
 
-The repository includes provides code for running three different methods for identifying floods from DigitalGlobe's WorldView-2 imagery. The three methods include: thresholding spectral indices, applying supervised machine learning methods and applying unsupervised machine learning methods. These three methods can be found in the following notebooks:
+The repository includes provides code for running three different methods for identifying floods from DigitalGlobe's WorldView-2 imagery. The three methods include: thresholding spectral indices, applying supervised machine learning methods and applying unsupervised machine learning methods. Each of the three methods can be found in the following notebooks:
 
 - Thresholding spectral indices: final_calculating_water_shadow_indices.ipynb
 - Supervised machine learning: final_supervised_ML_SVM_random_forest.ipynb
@@ -16,8 +16,7 @@ Additional "explorations" notebooks have been included showing more of the proce
 
 The notebooks were developed using WorldView-2 pan sharpened 8-band geoTIFF files for a flooding event in Abidjan, Ivory Coast on June 17, 2016. Imagery data was accessed using DigitalGlobe's [GBDX portal](https://platform.digitalglobe.com/gbdx/). The analysis was run on an image focused on the Koumassi area of Abidjan. Different pan-sharpened WorldView-2 images can be selected and run by the user. A subscription is required to access DG imagery, though a 30 day trial was available for users at the time of writing (March 2019). 
 
-To run this analyis, a user must update the area of interest parameter with the name of the imagery directory per instructions within the notebook (line 4). The notebook assumes the directory naming structure is as follows: "dg-data\\aoi-name\\". The user aoi imagery directory should contain pan-sharpened 8-band imagery TIF files from WorldView-2. The user must also update the working directory to point towards where the imagery files are located. 
-
+To run this analyis, a user must update the area of interest parameter with the name of the imagery directory per instructions within the notebook (line 4). The user aoi imagery directory should contain pan-sharpened 8-band imagery TIF files from WorldView-2. 
 # notebooks
 
 ## NDWI_MSI_with_modules
