@@ -26,11 +26,11 @@ Notebooks are named with a tag of "final" or "explorations". "Final" notebooks r
 
 ## Flood detection via Calculation of Spectral Metrics
 
-###1. Notebook name: final_calculating_spectral_indices.ipynb
+### 1. Notebook name: final_calculating_spectral_indices.ipynb
 
 This notebook calculates spectral indices including the normalized difference water index (NDWI), morphological shadow index (MSI), normalized difference vegetation index (NDVI), and morphological building index (MBI). The notebook combines these four indices into a resulting threshold map with identified areas of flood, shadow, vegetation and buildings. Additionally the accuracy score and confusion matrix are calcaulted using a reference data set. The notebook writes out each of the individual spectral indices as a geoTIFF to a specified outputs folder. In addition to index calculations, the notebook also defines masks for each index based on user defined thresholds. Each mask and the combined thresholded map is also written out as a geoTIFF. The confusion matrix is also output as a CSV file. 
 
-###2. Notebook name: explorations_calculating_spectral_indices.ipynb
+### 2. Notebook name: explorations_calculating_spectral_indices.ipynb
 
 In addition to the summary described above for the final notebook, the explorations notebook includes additional experimentation and exploration with different formulations and analyses of NDWI and MSI. The explorations notebook includes additional plots and visualizations compared with the final version. 
 
