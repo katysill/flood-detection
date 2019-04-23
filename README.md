@@ -12,15 +12,27 @@ Note that the supervised machine learning notebook relies on inputs from final_c
 
 Additional "explorations" notebooks have been included showing more of the process completed to finalize each of the supervised and unsupervised models. Note that the explorations notebooks rely on inputs from final_calculating_water_shadow_indices.ipynb
 
+~note that README file is in the process of being updated and will be finalized shortly! ~
+
 # input data required
 
 The notebooks were developed using WorldView-2 pan sharpened 8-band geoTIFF files for a flooding event in Abidjan, Ivory Coast on June 17, 2016. Imagery data was accessed using DigitalGlobe's [GBDX portal](https://platform.digitalglobe.com/gbdx/). The analysis was run on an image focused on the Koumassi area of Abidjan. Different pan-sharpened WorldView-2 images can be selected and run by the user. A subscription is required to access DG imagery, though a 30 day trial was available for users at the time of writing (March 2019). 
 
 To run this analyis, a user must update the area of interest parameter with the name of the imagery directory per instructions within the notebook (line 4). The user aoi imagery directory should contain pan-sharpened 8-band imagery TIF files from WorldView-2. 
+
 # notebooks
 
-## NDWI_MSI_with_modules
-The 'NDWI_MSI_with_modules' notebook can be used to calculate the normalized difference water index (NDWI), morphological shadow index (MSI), normalized difference vegetation index (NDVI), and morphological building index (MBI). The notebook writes out each of these indices as a geoTIFF to a specified outputs folder. In addition to index calculations, the notebook also creates masks for each index based on user defined thresholds. Each mask is also written out as a geoTIFF. Finally, the notebook includes some experimentation and exploration with different formulations and analyses of NDWI and MSI. 
+Notebooks are named with a tag of "final" or "explorations". "Final" notebooks represent the workflow used to develop the finalized workflow and results. The final workflow was developed after using the explorations notebooks to identify parameters such as appropriate thresholds and ideal model inputs. 
+
+## Flood detection via Calculation of Spectral Metrics
+
+###1. Notebook name: final_calculating_spectral_indices.ipynb
+
+This notebook calculates spectral indices including the normalized difference water index (NDWI), morphological shadow index (MSI), normalized difference vegetation index (NDVI), and morphological building index (MBI). The notebook combines these four indices into a resulting threshold map with identified areas of flood, shadow, vegetation and buildings. Additionally the accuracy score and confusion matrix are calcaulted using a reference data set. The notebook writes out each of the individual spectral indices as a geoTIFF to a specified outputs folder. In addition to index calculations, the notebook also defines masks for each index based on user defined thresholds. Each mask and the combined thresholded map is also written out as a geoTIFF. The confusion matrix is also output as a CSV file. 
+
+###2. Notebook name: explorations_calculating_spectral_indices.ipynb
+
+In addition to the summary described above for the final notebook, the explorations notebook includes additional experimentation and exploration with different formulations and analyses of NDWI and MSI. The explorations notebook includes additional plots and visualizations compared with the final version. 
 
 ### customizable parameters
 
