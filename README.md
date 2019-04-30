@@ -1,8 +1,8 @@
 # Flood detection workflow
 
-This repository is for a research project focused on differentiating building shadow from flood waters in urban settings during flooding events. The workflow is motivated by the challenges in rapidly and accurately assessing flooding extent utilizing high resolution remote sensing imagery, as shadows from buildings look spectrally similar to water. The workflow utilizes packages from NumPy, Matplotlib, scikit-image, scikit-learn, RasterIO, and EarthPy. The workbook was developed using the [earth-analytics-python environment](https://github.com/earthlab/earth-analytics-python-env)
+This repository is for a research project focused on improving urban flood detection with a focus on differentiating building shadow from flood waters. The workflow is motivated by the challenges in rapidly and accurately assessing flooding extent utilizing high resolution remote sensing imagery, as shadows from buildings look spectrally similar to water. The workflow utilizes packages from NumPy, Matplotlib, scikit-image, scikit-learn, RasterIO, and EarthPy. The workbook was developed using the [earth-analytics-python environment](https://github.com/earthlab/earth-analytics-python-env)
 
-The repository includes provides code for running three different methods for identifying floods from DigitalGlobe's WorldView-2 imagery. The three methods include: thresholding spectral indices, applying supervised machine learning methods and applying unsupervised machine learning methods. Each of the three methods can be found in the following notebooks:
+The repository includes provides code for running three different approaches for identifying floods from DigitalGlobe's WorldView-2 imagery. The three approaches include: thresholding spectral indices, applying supervised machine learning methods and applying unsupervised machine learning methods. Each of the three approaches can be found in the following notebooks:
 
 - Thresholding spectral indices: final_calculating_water_shadow_indices.ipynb
 - Supervised machine learning: final_supervised_ML_SVM_random_forest.ipynb
@@ -28,11 +28,19 @@ Notebooks are named with a tag of "final" or "explorations". "Final" notebooks r
 
 ### 1. Notebook name: final_calculating_spectral_indices.ipynb
 
-This notebook calculates spectral indices including the normalized difference water index (NDWI), morphological shadow index (MSI), normalized difference vegetation index (NDVI), and morphological building index (MBI). The notebook combines these four indices into a resulting threshold map with identified areas of flood, shadow, vegetation and buildings. Additionally the accuracy score and confusion matrix are calcaulted using a reference data set. The notebook writes out each of the individual spectral indices as a geoTIFF to a specified outputs folder. In addition to index calculations, the notebook also defines masks for each index based on user defined thresholds. Each mask and the combined thresholded map is also written out as a geoTIFF. The confusion matrix is also output as a CSV file. 
+This notebook calculates spectral indices including the normalized difference water index (NDWI), morphological shadow index (MSI), normalized difference vegetation index (NDVI), and morphological building index (MBI). In addition to index calculations, the notebook also defines masks for each index based on user defined thresholds.The notebook combines these four masks into a resulting threshold map with identified areas of flood, shadow, vegetation and buildings. Additionally the accuracy score and confusion matrix are calculated using a reference data set. 
+
+#### outputs
+Output rasters (geoTIFF format) will be placed into  "../final_outputs/raster_files/" directory located within the imagery directory. This directory is created within the notebook. The notebook writes out each of the individual spectral indices as a geoTIFF to the specified outputs folder. Each mask and the combined thresholded map is also written out as a geoTIFF. 
+
+Thresholding results are places in a "../final_outputs/threshold/" directory located within the imagery directory. The thresholded map is written out as a geoTIFF. The confusion matrix is output as a CSV file. 
 
 ### 2. Notebook name: explorations_calculating_spectral_indices.ipynb
 
 In addition to the summary described above for the final notebook, the explorations notebook includes additional experimentation and exploration with different formulations and analyses of NDWI and MSI. The explorations notebook includes additional plots and visualizations compared with the final version. 
+
+#### outputs
+Output rasters (geoTIFF format) will be placed into an "../explorations_outputs/raster_files/" directory located within the imagery directory. This directory is created within the notebook.
 
 ### customizable parameters
 
