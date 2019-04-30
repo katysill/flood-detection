@@ -37,7 +37,7 @@ Thresholding results are places in a "../final_outputs/threshold/" directory loc
 
 ### 2. Notebook name: explorations_calculating_spectral_indices.ipynb
 
-In addition to the summary described above for the final notebook, the explorations notebook includes additional experimentation and exploration with different formulations and analyses of NDWI and MSI. The explorations notebook includes additional plots and visualizations compared with the final version. 
+In addition to the summary described above for the final notebook, the explorations notebook includes additional experimentation and exploration with different formulations and analyses of NDWI and MSI. The explorations notebook includes additional plots and visualizations compared with the final version. Also, code is included to create and apply a cloudmask to the 8-band raster stack, followed by the calculation of spectral indices for the cloud  masked image. This cloud mask was not needed for the final AOIs (Koumassi and Southeast) selected for the research study. 
 
 #### outputs
 Output rasters (geoTIFF format) will be placed into an "../explorations_outputs/raster_files/" directory located within the imagery directory. This directory is created within the notebook.
