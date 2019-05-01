@@ -26,7 +26,9 @@ Notebooks are named with a tag of "final" or "explorations". "Final" notebooks r
 
 ## Flood detection via Calculation of Spectral Metrics
 
-### 1. Notebook names: final_calculating_spectral_indices_koumassi.ipynb and final_calculating_spectral_indices_southeast.ipynb
+### 1. Notebook names: 
+* final_calculating_spectral_indices_koumassi.ipynb
+* final_calculating_spectral_indices_southeast.ipynb
 
 These notebook calculates spectral indices including the normalized difference water index (NDWI), morphological shadow index (MSI), normalized difference vegetation index (NDVI), and morphological building index (MBI). In addition to index calculations, the notebooks also defines masks for each index based on user defined thresholds.The notebooks combines the four masks into a resulting threshold map with identified areas of flood, shadow, vegetation and buildings. Additionally the accuracy score and confusion matrix are calculated using a reference data set. 
 
@@ -60,7 +62,8 @@ Output rasters (geoTIFF format) will be placed into an "outputs/raster" director
 
 ## Flood detection via Supervised Machine Learning
 
-## 3. Notebook name: final_supervised_ML_SVM_RandomForest_combined.ipynb
+## 3. Notebook name: 
+* final_supervised_ML_SVM_RandomForest_combined.ipynb
 
 This notebook samples shapefiles for both the Koumassi and Southeast areas of interest to collect spectral band and index values at reference points. The notebook combines the raw spectral information with the reference class value to create a training data set for each site. The training data sets for each site are combined in a pandas dataframe to create a combined training data set. The combined data set is split into a training/testing set (60% of total) and an external validation set (40% of total). A linear kernel SVM model is then trained and tested, and the user can select the model with the best accuracy score to write out for later use. THe confusion matrix is plotted for the final trained model. The final model is then applied to the external validation data set, along with the accuracy score and confusion matrix. Finally, the model is applied to each area of interest and plot of the result is created. The same process is then followed for the training/testing, external validation and plotting using the random forest classifier.
 
@@ -78,7 +81,9 @@ This notebook samples shapefiles for both the Koumassi and Southeast areas of in
 ### Outputs
 All outputs are written out to a "..\combined\" folder location. The folder is created within the code. The raw index values for each sample point, along with the internal and external data sets are written out as CSV files for backup purposes. Confusion matrices are  saved as CSV files. Pickled SVM and random forest classifiers are also saved for later use. 
 
-## 4. Notebook names: explorations_supervised_ML_SVM_RandomForest_koumassi.ipynb and explorations_supervised_ML_SVM_RandomForest_southeast.ipynb
+## 4. Notebook names: 
+* explorations_supervised_ML_SVM_RandomForest_koumassi.ipynb 
+* explorations_supervised_ML_SVM_RandomForest_southeast.ipynb
 
 In addition to the summary described above for the combined model, these two 'explorations' notebooks develop individual models for the two areas of interest: Koumassi and Southeast. The notebook follows a similar flow, though also explores the RBF kernel for SVM. These notebooks were used to explore different model input parameters. Final input parameters are labeled with the tag of "raw" in the calculating_spectral_indices notebooks for easy use of "glob."
 
