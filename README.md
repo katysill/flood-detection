@@ -4,8 +4,8 @@ This repository is for a research project focused on improving urban flood detec
 
 The repository includes provides code for running three different approaches for identifying floods from DigitalGlobe's WorldView-2 imagery. The three approaches include: thresholding spectral indices, applying supervised machine learning methods and applying unsupervised machine learning methods. Each of the three approaches can be found in the following notebooks:
 
-- Thresholding spectral indices: final_calculating_water_shadow_indices.ipynb
-- Supervised machine learning: final_supervised_ML_SVM_random_forest.ipynb
+- Thresholding spectral indices: final_calculating_spectral_indices_koumassi.ipynb and final_calculating_spectral_indices_southeast.ipynb
+- Supervised machine learning: final_supervised_ML_SVM_random_forest_combined.ipynb
 - Unsupervised machine learning: final_unsupervised_ML_kmeans_GMM.ipynb
 
 Note that the supervised machine learning notebook relies on inputs from final_calculating_water_shadow_indices.ipynb
@@ -26,40 +26,65 @@ Notebooks are named with a tag of "final" or "explorations". "Final" notebooks r
 
 ## Flood detection via Calculation of Spectral Metrics
 
-### 1. Notebook name: final_calculating_spectral_indices.ipynb
+### 1. Notebook names: final_calculating_spectral_indices_koumassi.ipynb and final_calculating_spectral_indices_southeast.ipynb
 
-This notebook calculates spectral indices including the normalized difference water index (NDWI), morphological shadow index (MSI), normalized difference vegetation index (NDVI), and morphological building index (MBI). In addition to index calculations, the notebook also defines masks for each index based on user defined thresholds.The notebook combines these four masks into a resulting threshold map with identified areas of flood, shadow, vegetation and buildings. Additionally the accuracy score and confusion matrix are calculated using a reference data set. 
+These notebook calculates spectral indices including the normalized difference water index (NDWI), morphological shadow index (MSI), normalized difference vegetation index (NDVI), and morphological building index (MBI). In addition to index calculations, the notebooks also defines masks for each index based on user defined thresholds.The notebooks combines the four masks into a resulting threshold map with identified areas of flood, shadow, vegetation and buildings. Additionally the accuracy score and confusion matrix are calculated using a reference data set. 
 
 #### outputs
-Output rasters (geoTIFF format) will be placed into  "../final_outputs/raster_files/" directory located within the imagery directory. This directory is created within the notebook. The notebook writes out each of the individual spectral indices as a geoTIFF to the specified outputs folder. Each mask and the combined thresholded map is also written out as a geoTIFF. 
+Output rasters (geoTIFF format) will be placed into  "../final_outputs/raster_files/" directory located within the area of interest imagery directory. This directory is created within each notebook. The notebooks write out each of the individual spectral indices as a geoTIFF to the specified outputs folder. Each mask and the combined thresholded map is also written out as a geoTIFF. 
 
-Thresholding results are places in a "../final_outputs/threshold/" directory located within the imagery directory. The thresholded map is written out as a geoTIFF. The confusion matrix is output as a CSV file. 
+Thresholding results are places in a "../final_outputs/threshold/" directory located within the area of interest imagery directory. The thresholded map is written out as a geoTIFF. The confusion matrix is output as a CSV file. 
 
 ### 2. Notebook name: explorations_calculating_spectral_indices.ipynb
 
-In addition to the summary described above for the final notebook, the explorations notebook includes additional experimentation and exploration with different formulations and analyses of NDWI and MSI. The explorations notebook includes additional plots and visualizations compared with the final version. Also, code is included to create and apply a cloudmask to the 8-band raster stack, followed by the calculation of spectral indices for the cloud  masked image. This cloud mask was not needed for the final AOIs (Koumassi and Southeast) selected for the research study. 
+In addition to the summary described above for the final notebooks, the explorations notebook includes additional experimentation and exploration with different formulations and analyses of NDWI and MSI. The explorations notebook includes additional plots and visualizations compared with the final versions. Also, code is included to create and apply a cloudmask to the 8-band raster stack, followed by the calculation of spectral indices for the cloud  masked image. This cloud mask was not needed for the final areas of interest (Koumassi and Southeast) selected for the research study. 
 
 #### outputs
 Output rasters (geoTIFF format) will be placed into an "../explorations_outputs/raster_files/" directory located within the imagery directory. This directory is created within the notebook.
 
-### customizable parameters
+### customizable parameters for calculating_spectral_indices notebooks
 
-The analysis will run on any WV-2 image once the AOI and working directory have been appropriately defined. As each image may have individual features, the user may choose to customize input values within the notebook for the following:
-- Definition/thresholds for the cloud mask (line 18)
-- Definition/thresholds for the flood masks (line 30)
-- Definition/thresholds for the NDWI masks (line 31)
-- Thresholds/disk size for smoothing of flood and vegetation masks (line 34)
-- Morphological shadow index (MSI) calculation inputs (line 40)
-- Threshold for shadow mask (line 44)
-- Morphological building index (MSI) calculation inputs (line 70)
-- Threshold for building mask (line 73)
+The analysis will run on any WV-2 image once the area of interest has been appropriately defined. As each image may have individual features, the user may choose to customize input values within the notebook. Customizable parameters are indicated in markdown within the notebook. 
+- Definition/thresholds for the cloud mask 
+- Definition/thresholds for the flood masks 
+- Definition/thresholds for the NDWI masks 
+- Thresholds/disk size for smoothing of flood and vegetation masks 
+- Morphological shadow index (MSI) calculation inputs 
+- Threshold for shadow mask 
+- Morphological building index (MSI) calculation inputs 
+- Threshold for building mask 
 
 ### outputs
 
 Output rasters (geoTIFF format) will be placed into an "outputs/raster" directory located within the imagery directory. This directory is created within the notebook. 
 
-## k-means_exploration and SVM_exploration
+## Flood detection via Supervised Machine Learning
 
+## 3. Notebook name: final_supervised_ML_SVM_RandomForest_combined.ipynb
+
+This notebook samples shapefiles for both the Koumassi and Southeast areas of interest to collect spectral band and index values at reference points. The notebook combines the raw spectral information with the reference class value to create a training data set for each site. The training data sets for each site are combined in a pandas dataframe to create a combined training data set. The combined data set is split into a training/testing set (60% of total) and an external validation set (40% of total). A linear kernel SVM model is then trained and tested, and the user can select the model with the best accuracy score to write out for later use. THe confusion matrix is plotted for the final trained model. The final model is then applied to the external validation data set, along with the accuracy score and confusion matrix. Finally, the model is applied to each area of interest and plot of the result is created. The same process is then followed for the training/testing, external validation and plotting using the random forest classifier.
+
+### Model inputs include the following spectral bands/indices: 
+
+* summation of NIR1, NIR2 and RE bands
+* morphological building index (MBI)
+* morphological shadow index (MSI)
+* normalized difference vegetation index (NDVI)
+* normalized difference water index (NDWI coastal/NIR2)
+* the difference between NDWI and MSI (NDWIcoastal/NIR2 - MSI)
+* normalized difference water index (NDWI yellow/NIR2)
+* the difference between NDWI and MSI (NDWIyellowNIR2 - MSI)
+
+### Outputs
+All outputs are written out to a "..\combined\" folder location. The folder is created within the code. The raw index values for each sample point, along with the internal and external data sets are written out as CSV files for backup purposes. Confusion matrices are  saved as CSV files. Pickled SVM and random forest classifiers are also saved for later use. 
+
+## 4. Notebook names: explorations_supervised_ML_SVM_RandomForest_koumassi.ipynb and explorations_supervised_ML_SVM_RandomForest_southeast.ipynb
+
+In addition to the summary described above for the combined model, these two 'explorations' notebooks develop individual models for the two areas of interest: Koumassi and Southeast. The notebook follows a similar flow, though also explores the RBF kernel for SVM. These notebooks were used to explore different model input parameters. Final input parameters are labeled with the tag of "raw" in the calculating_spectral_indices notebooks for easy use of "glob."
+
+## Flood detection via Unupervised Machine Learning
+
+## k-means
 The 'k-means_exploration' and 'SVM_exploration' notebooks are working notebooks to explore how unsupervised and supervised learning might improve the workflow goal of differentiating building shadow from flood waters. 
 
 ### outputs
