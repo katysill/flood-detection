@@ -1,9 +1,8 @@
-# Calculate  cloud mask
 def define_mask(band1, band2,threshold1, threshold2, disk_size):
 
-    """ Makes a mask (values of 0 or 1) based on two inputs and two thresholds.
-    Developed to create a cloud mask based on two input bands and associated thresholds.
-    Applies morphological opening using user input disk_size for structuring element
+    """ This function creates a mask (values of 0 or 1) based on two user defined inputs and two thresholds.
+    This function was developed to create a cloud mask based on two input bands and associated thresholds.
+    Finally, this function applies morphological opening using the user input disk_size for structuring element
 
     Parameters
     -----------
@@ -28,10 +27,9 @@ def define_mask(band1, band2,threshold1, threshold2, disk_size):
     return cloud_opened
 
 
-# Apply cloud mask to all_bands_scaled stack
 def apply_mask(mask_array, raster_input):
 
-    """ Applies mask to raster. Written to apply cloud mask to raster stack.
+    """ Applies mask to raster. Function was written to apply a previously defined cloud mask to a raster stack.
 
     Parameters
     -----------
@@ -40,7 +38,7 @@ def apply_mask(mask_array, raster_input):
 
     Returns
     ----------
-    Cloud masked raster file or stack
+    Cloud masked raster file or stack as a numpy array
 
     """
     import numpy as np
@@ -49,4 +47,5 @@ def apply_mask(mask_array, raster_input):
     mask_to_shape = np.broadcast_to(mask_array == 1, raster_input.shape)
     raster_masked = ma.masked_array(raster_input,
                                       mask=mask_to_shape)
+
     return raster_masked

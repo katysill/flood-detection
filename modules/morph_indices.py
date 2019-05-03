@@ -2,8 +2,8 @@ import numpy as np
 
 def selemline(length, theta, dtype=np.uint8):
 
-    """Calculates linear structuring element.
-    Linear stucturing element is used in calc_msi and calc_mbi functions
+    """This function calculates a linear structuring element.
+    The linear stucturing element is used in the calc_msi and calc_mbi functions
 
     Parameters
     ------------
@@ -52,25 +52,10 @@ def calc_msi(raster_input, s_min, s_max, s_delta):
     from skimage.morphology import black_tophat
     from skimage import draw
 
-    # # Function for calculating the linear structuring element
-    # def selemline(length, theta, dtype=np.uint8):
-    #     """Line structuring element"""
-    #     theta_d = theta * np.pi / 180
-    #     X = int(round((length-1)/2. * np.cos(theta_d)))
-    #     Y = int(-round((length-1)/2. * np.sin(theta_d)))
-    #     C, R, V = draw.line_aa(-X, -Y, X, Y)
-    #     M = 2*max(abs(R)) + 1
-    #     N = 2*max(abs(C)) + 1
-    #     selem = np.zeros((M, N)).astype(dtype)
-    #     selem[R + max(abs(R)), C + max(abs(C))] = 1
-    #     return selem
-
-
     # Calculate brightness for cloud masked stack
     brightness=np.nanmax(raster_input, axis=0)
 
     # Cap brightness values at a max of 1. Replace all values greater than 1 with a value of 1
-    # brightness_cap=np.ma.where(brightness>1,1,brightness)
     brightness_cap=np.where(brightness>1,1,brightness)
 
     # Initialize inputs for MSI calculation
@@ -116,19 +101,7 @@ def calc_mbi(raster_input, s_min, s_max, s_delta):
     from skimage.morphology import white_tophat
     from skimage import draw
 
-    # # Function for calculating the linear structuring element
-    # def selemline(length, theta, dtype=np.uint8):
-    #     """Line structuring element"""
-    #     theta_d = theta * np.pi / 180
-    #     X = int(round((length-1)/2. * np.cos(theta_d)))
-    #     Y = int(-round((length-1)/2. * np.sin(theta_d)))
-    #     C, R, V = draw.line_aa(-X, -Y, X, Y)
-    #     M = 2*max(abs(R)) + 1
-    #     N = 2*max(abs(C)) + 1
-    #     selem = np.zeros((M, N)).astype(dtype)
-    #     selem[R + max(abs(R)), C + max(abs(C))] = 1
-    #     return selem
-
+ 
     # Calculate brightness for cloud masked stack
     brightness=np.nanmax(raster_input, axis=0)
 
@@ -173,8 +146,13 @@ def smooth_disk(index_array,threshold, disk_size):
 
     from skimage.morphology import opening, disk
 
+    # Create a mask based on user defined threshold values
     index_threshold_mask = (index_array>=threshold).astype(int)
+    
+    # Define the structure element based on the user defined disk size
     selem = disk(disk_size)
+    
+    # Apply the morphological opening function to the thresholded raster
     index_opened = opening(index_threshold_mask, selem)
 
     return index_opened
@@ -199,6 +177,9 @@ def remove_small_patches(raster_input, patch_threshold):
 
     from skimage import measure, morphology
 
+    # Labels connected object within the image
     patch_labels = measure.label(raster_input, background=0)
+    
+    # Removes all objects less than the user defined patch_threshold
     raster_cleaned = morphology.remove_small_objects(patch_labels, min_size=patch_threshold)
     return raster_cleaned
