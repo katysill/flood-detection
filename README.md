@@ -12,8 +12,6 @@ Note that the machine learning notebooks rely on inputs from final_calculating_w
 
 Additional "explorations" notebooks have been included showing more of the process completed to finalize each of the supervised and unsupervised models. Note that the explorations notebooks rely on inputs from final_calculating_water_shadow_indices.ipynb
 
-~note that README file is in the process of being updated and will be finalized shortly! ~
-
 # Input Data Required
 
 The notebooks were developed using WorldView-2 pan sharpened 8-band geoTIFF files for a flooding event in Abidjan, Ivory Coast on June 17, 2016. Imagery data was accessed using DigitalGlobe's [GBDX portal](https://platform.digitalglobe.com/gbdx/). The analysis was run on an image focused on the Koumassi area of Abidjan. Different pan-sharpened WorldView-2 images can be selected and run by the user. A subscription is required to access DG imagery, though a 30 day trial was available for users at the time of writing (March 2019). 
@@ -51,7 +49,8 @@ Two modules were developed and are required to run the 'calculating_spectral_ind
 
 ### customizable parameters for calculating_spectral_indices notebooks
 
-The analysis will run on any WV-2 image once the area of interest has been appropriately defined. As each image may have individual features, the user may choose to customize input values within the notebook. Customizable parameters are indicated in markdown within the notebook. 
+The analysis will run on any WV-2 image once the area of interest has been appropriately defined. As each image may have individual features, the user may choose to customize input values within the notebook. Customizable parameters are indicated in markdown within the notebook. Some of the customizable parameter include: 
+
 - Definition/thresholds for the cloud mask 
 - Definition/thresholds for the flood masks 
 - Definition/thresholds for the NDWI masks 
