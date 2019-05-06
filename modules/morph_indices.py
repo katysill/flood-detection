@@ -1,3 +1,11 @@
+
+""" The functions in this module can be used to calculated the morphological
+shadow index (MSI) and morphological building index (MBI). Additionally,
+de-noising functions are included using both morphological smoothing and
+labeling methods. These functions were developed  improve flood detection
+in urban environments."""
+
+
 import numpy as np
 
 def selemline(length, theta, dtype=np.uint8):

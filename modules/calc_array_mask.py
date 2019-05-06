@@ -1,3 +1,8 @@
+''' The functions in this module can be used to define and apply a mask to an
+individual or stack of raster files. The functions were designed specfically
+to define and apply a cloud mask to a raster stack.'''
+
+
 def define_mask(band1, band2,threshold1, threshold2, disk_size):
 
     """ This function creates a mask (values of 0 or 1) based on two user defined inputs and two thresholds.
