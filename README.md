@@ -1,6 +1,6 @@
 # Flood Detection Workflow
 
-This repository is for a research project focused on improving urban flood detection with a focus on differentiating building shadow from flood waters. The workflow is motivated by the challenges in rapidly and accurately assessing flooding extent utilizing high resolution remote sensing imagery, as shadows from buildings look spectrally similar to water. The workflow utilizes packages from NumPy, Matplotlib, scikit-image, scikit-learn, RasterIO, and EarthPy. The workbook was developed using the [earth-analytics-python environment](https://github.com/earthlab/earth-analytics-python-env)
+This repository is for a research project focused on improving urban flood detection with a focus on differentiating building shadow from flood waters. The workflow is motivated by the challenges in rapidly and accurately assessing flooding extent utilizing high resolution remote sensing imagery, as shadows from buildings look spectrally similar to water. 
 
 The repository includes provides code for running three different approaches for identifying floods from DigitalGlobe's WorldView-2 imagery. The three approaches include: thresholding spectral indices, applying supervised machine learning methods and applying unsupervised machine learning methods. Each of the three approaches can be found in the following notebooks:
 
@@ -19,6 +19,9 @@ The notebooks were developed using WorldView-2 pan sharpened 8-band geoTIFF file
 To validate models, a reference data set is required. Reference data should include known land cover class values for reference points in a CSV format and a shapefile for all reference points. 
 
 To run this analyis, a user must update the area of interest parameter with the name of the imagery directory per instructions within the notebook (line 4). The user aoi imagery directory should contain pan-sharpened 8-band imagery TIF files from WorldView-2. 
+
+# Development Environment
+The notebooks were developed using Python 3.7.1 on a Windows system. The workflow utilizes packages from NumPy, Matplotlib, scikit-image, scikit-learn, RasterIO, and EarthPy. The workbook was developed using the [earth-analytics-python environment](https://github.com/earthlab/earth-analytics-python-env)
 
 # Notebooks
 
@@ -114,9 +117,6 @@ explorations_supervised_ML_SVM_Random_Forest_applying_to_beira.ipnyb
 explorations_unsupervised_ML_kmeans_gmm_beira.ipynb
 
 All outputs are the same as those described above for the final workflow. Outputs are placed in an /../explorations_outputs/ directory. 
-
-# Development Environment
-The notebooks were developed using Python 3.7.1 on a Windows system
 
 # References
 - Cloud to Street. Urban Flood Mapping Using Very-High Resolution Satellite Imagery. Available at: https://abidjan.cloudtostreet.info/info
