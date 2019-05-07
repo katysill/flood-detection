@@ -1,6 +1,6 @@
 # Flood Detection Workflow
 
-This repository is for a research project focused on improving urban flood detection with a focus on differentiating building shadow from flood waters. The workflow is motivated by the challenges in rapidly and accurately assessing flooding extent utilizing high resolution remote sensing imagery, as shadows from buildings look spectrally similar to water. The workflow utilizes packages from NumPy, Matplotlib, scikit-image, scikit-learn, RasterIO, and EarthPy. The workbook was developed using the [earth-analytics-python environment](https://github.com/earthlab/earth-analytics-python-env)
+This repository is for a research project focused on improving urban flood detection with a focus on differentiating building shadow from flood waters. The workflow is motivated by the challenges in rapidly and accurately assessing flooding extent utilizing high resolution remote sensing imagery, as shadows from buildings look spectrally similar to water. 
 
 The repository includes provides code for running three different approaches for identifying floods from DigitalGlobe's WorldView-2 imagery. The three approaches include: thresholding spectral indices, applying supervised machine learning methods and applying unsupervised machine learning methods. Each of the three approaches can be found in the following notebooks:
 
@@ -12,8 +12,6 @@ Note that the machine learning notebooks rely on inputs from final_calculating_w
 
 Additional "explorations" notebooks have been included showing more of the process completed to finalize each of the supervised and unsupervised models. Note that the explorations notebooks rely on inputs from final_calculating_water_shadow_indices.ipynb
 
-~note that README file is in the process of being updated and will be finalized shortly! ~
-
 # Input Data Required
 
 The notebooks were developed using WorldView-2 pan sharpened 8-band geoTIFF files for a flooding event in Abidjan, Ivory Coast on June 17, 2016. Imagery data was accessed using DigitalGlobe's [GBDX portal](https://platform.digitalglobe.com/gbdx/). The analysis was run on an image focused on the Koumassi area of Abidjan. Different pan-sharpened WorldView-2 images can be selected and run by the user. A subscription is required to access DG imagery, though a 30 day trial was available for users at the time of writing (March 2019). 
@@ -21,6 +19,9 @@ The notebooks were developed using WorldView-2 pan sharpened 8-band geoTIFF file
 To validate models, a reference data set is required. Reference data should include known land cover class values for reference points in a CSV format and a shapefile for all reference points. 
 
 To run this analyis, a user must update the area of interest parameter with the name of the imagery directory per instructions within the notebook (line 4). The user aoi imagery directory should contain pan-sharpened 8-band imagery TIF files from WorldView-2. 
+
+# Development Environment
+The notebooks were developed using Python 3.7.1 on a Windows system. The workflow utilizes packages from NumPy, Matplotlib, scikit-image, scikit-learn, RasterIO, and EarthPy. The workbook was developed using the [earth-analytics-python environment](https://github.com/earthlab/earth-analytics-python-env)
 
 # Notebooks
 
@@ -51,7 +52,8 @@ Two modules were developed and are required to run the 'calculating_spectral_ind
 
 ### customizable parameters for calculating_spectral_indices notebooks
 
-The analysis will run on any WV-2 image once the area of interest has been appropriately defined. As each image may have individual features, the user may choose to customize input values within the notebook. Customizable parameters are indicated in markdown within the notebook. 
+The analysis will run on any WV-2 image once the area of interest has been appropriately defined. As each image may have individual features, the user may choose to customize input values within the notebook. Customizable parameters are indicated in markdown within the notebook. Some of the customizable parameter include: 
+
 - Definition/thresholds for the cloud mask 
 - Definition/thresholds for the flood masks 
 - Definition/thresholds for the NDWI masks 
@@ -115,9 +117,6 @@ explorations_supervised_ML_SVM_Random_Forest_applying_to_beira.ipnyb
 explorations_unsupervised_ML_kmeans_gmm_beira.ipynb
 
 All outputs are the same as those described above for the final workflow. Outputs are placed in an /../explorations_outputs/ directory. 
-
-# Development Environment
-The notebooks were developed using Python 3.7.1 on a Windows system
 
 # References
 - Cloud to Street. Urban Flood Mapping Using Very-High Resolution Satellite Imagery. Available at: https://abidjan.cloudtostreet.info/info
