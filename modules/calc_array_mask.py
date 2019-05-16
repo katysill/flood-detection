@@ -1,13 +1,20 @@
-''' The functions in this module can be used to define and apply a mask to an
-individual or stack of raster files. The functions were designed specfically
-to define and apply a cloud mask to a raster stack.'''
+''' The functions in this module can be used to define and apply a mask
+to an individual or stack of raster files. The functions were designed
+specfically to define and apply a cloud mask to a raster stack.'''
+
+import numpy as np
+import numpy.ma as ma
+from skimage.morphology import disk, opening
 
 
 def define_mask(band1, band2,threshold1, threshold2, disk_size):
 
-    """ This function creates a mask (values of 0 or 1) based on two user defined inputs and two thresholds.
-    This function was developed to create a cloud mask based on two input bands and associated thresholds.
-    Finally, this function applies morphological opening using the user input disk_size for structuring element
+    """ This function creates a mask (values of 0 or 1) based on two user
+    defined inputs and two thresholds.
+    This function was developed to create a cloud mask based on two input
+    bands and associated thresholds.
+    Finally, this function applies morphological opening using the user
+    input disk_size for structuring element
 
     Parameters
     -----------
@@ -20,9 +27,6 @@ def define_mask(band1, band2,threshold1, threshold2, disk_size):
     Morphologically opened numpy array mask (values of 0 or 1)
 
     """
-    from skimage.morphology import disk, opening
-    import numpy as np
-
     if not (band1.shape == band2.shape):
         raise ValueError("Both arrays should have the same dimensions")
 
@@ -34,7 +38,8 @@ def define_mask(band1, band2,threshold1, threshold2, disk_size):
 
 def apply_mask(mask_array, raster_input):
 
-    """ Applies mask to raster. Function was written to apply a previously defined cloud mask to a raster stack.
+    """ Applies mask to raster. Function was written to apply a
+    previously defined cloud mask to a raster stack.
 
     Parameters
     -----------
@@ -44,10 +49,7 @@ def apply_mask(mask_array, raster_input):
     Returns
     ----------
     Cloud masked raster file or stack as a numpy array
-
     """
-    import numpy as np
-    import numpy.ma as ma
 
     mask_to_shape = np.broadcast_to(mask_array == 1, raster_input.shape)
     raster_masked = ma.masked_array(raster_input,
