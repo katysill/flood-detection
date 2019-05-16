@@ -1,1 +1,1 @@
-This is to initialize the aoi folder
+Place tif files from area of interest here. Rename "aoi" as name of specific site. 
