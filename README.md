@@ -29,7 +29,7 @@ Notebooks are named with a tag of "final" or "explorations". "Final" notebooks r
 
 ## Flood detection via Calculation of Spectral Metrics
 
-### Notebook names: 
+### Notebooks: 
 * final_calculating_spectral_indices_koumassi.ipynb
 * final_calculating_spectral_indices_southeast.ipynb
 
@@ -40,7 +40,8 @@ Output spectral index rasters (geoTIFF format) will be placed into  "../final_ou
 
 Thresholding results are places in a "../final_outputs/threshold/" directory located within the area of interest imagery directory. The thresholded map is written out as a geoTIFF. The confusion matrix is output as a CSV file. 
 
-### Notebook name: explorations_calculating_spectral_indices.ipynb
+### Notebook: 
+* explorations_calculating_spectral_indices.ipynb
 
 In addition to the summary described above for the final notebooks, the explorations notebook includes additional experimentation and exploration with different formulations and analyses of NDWI and MSI. The explorations notebook includes additional plots and visualizations compared with the final versions. Also, code is included to create and apply a cloudmask to the 8-band raster stack, followed by the calculation of spectral indices for the cloud  masked image. This cloud mask was not needed for the final areas of interest (Koumassi and Southeast) selected for the research study. 
 
@@ -66,7 +67,7 @@ The analysis will run on any WV-2 image once the area of interest has been appro
 
 ## Flood detection via Supervised Machine Learning
 
-### Notebook name: 
+### Notebook: 
 * final_supervised_ML_SVM_RandomForest_combined.ipynb
 
 This notebook samples shapefiles for both the Koumassi and Southeast areas of interest to collect spectral band and index values at reference points. The notebook combines the raw spectral information with the reference class values to create a training data set for each site. The training data sets for each site are combined in a pandas dataframe to create a combined training data set. The combined data set is split into a training/testing set (60% of total) and an external validation set (40% of total). A linear kernel SVM model is then trained and tested, and the user can select the model with the best accuracy score to write out for later use. The accuracy score and confusion matrix is plotted for the final trained model. The final model is then applied to the external validation data set, along with the accuracy score and confusion matrix. Finally, the model is applied to each area of interest and plot of the result is created. The same process is then followed for the training/testing, external validation and plotting using the random forest classifier.
@@ -88,7 +89,7 @@ All outputs are written out to a "../../combined/" directory. The directory is c
 
 ## Flood detection via Unupervised Machine Learning
 
-### Notebook names:
+### Notebooks:
 * final_unsupervised_ML_accuracy_scores_koumassi.ipynb
 * final_unsupervised_ML_accuracy_scores_southeast.ipynb
 
@@ -98,7 +99,7 @@ These notebooks apply the k-means clustering algorithm to the 8-band raster stac
 
 All outputs are saved in the "../final_outputs/kmeans/" directory. The resulting k-means cluster map is written out as a geoTIFF file and the confusion matrices as CSV files. 
 
-### Notebook names: 
+### Notebooks: 
 * explorations_unsupervised_ML_kmeans-gmm_koumassi.ipynb
 * explorations_unsupervised_ML_kmeans-gmm_southeast.ipynb
 
@@ -111,7 +112,7 @@ All outputs are saved in the "../explorations_outputs/kmeans/" directory. The re
 ## Applying machine learning approaches to a new location: Beira, Mozambique
 The trainined SVM and random forest models were applied to a flooded image from Beira, Mozambique from March 2019. This is an extension of the primary project and is a work in progress. 
 
-### Notebook names:
+### Notebooks:
 explorations_calculating_spectral_indices_beira.ipynb
 explorations_supervised_ML_SVM_Random_Forest_applying_to_beira.ipnyb
 explorations_unsupervised_ML_kmeans_gmm_beira.ipynb
