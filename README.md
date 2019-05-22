@@ -21,7 +21,7 @@ To validate models, a reference data set is required. Reference data should incl
 To run this analysis, a user must update the area of interest parameter with the name of the imagery directory per instructions within the notebook (line 4). The user AOI imagery directory should contain pan-sharpened 8-band imagery TIF files from WorldView-2. 
 
 # Development Environment
-The notebooks were developed using Python 3.7.1 on a Windows system. The workflow utilizes packages from NumPy, Matplotlib, scikit-image, scikit-learn, RasterIO, and EarthPy. The workbook was developed using the [earth-analytics-python environment](https://github.com/earthlab/earth-analytics-python-env)
+The notebooks were developed using Python 3.7.1 on a Windows system. The workflow utilizes packages from NumPy, Matplotlib, scikit-image, scikit-learn, RasterIO, and EarthPy. The workbook was developed using the [earth-analytics-python environment.](https://github.com/earthlab/earth-analytics-python-env)
 
 # Notebooks
 
