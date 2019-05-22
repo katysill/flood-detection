@@ -18,7 +18,7 @@ The notebooks were developed using WorldView-2 pan sharpened 8-band geoTIFF file
 
 To validate models, a reference data set is required. Reference data should include known land cover class values for reference points in a CSV format and a shapefile for all reference points. 
 
-To run this analyis, a user must update the area of interest parameter with the name of the imagery directory per instructions within the notebook (line 4). The user aoi imagery directory should contain pan-sharpened 8-band imagery TIF files from WorldView-2. 
+To run this analysis, a user must update the area of interest parameter with the name of the imagery directory per instructions within the notebook (line 4). The user AOI imagery directory should contain pan-sharpened 8-band imagery TIF files from WorldView-2. 
 
 # Development Environment
 The notebooks were developed using Python 3.7.1 on a Windows system. The workflow utilizes packages from NumPy, Matplotlib, scikit-image, scikit-learn, RasterIO, and EarthPy. The workbook was developed using the [earth-analytics-python environment](https://github.com/earthlab/earth-analytics-python-env)
@@ -33,7 +33,7 @@ Notebooks are named with a tag of "final" or "explorations". "Final" notebooks r
 * final_calculating_spectral_indices_koumassi.ipynb
 * final_calculating_spectral_indices_southeast.ipynb
 
-These notebook calculates spectral indices including the normalized difference water index (NDWI), morphological shadow index (MSI), normalized difference vegetation index (NDVI), and morphological building index (MBI). In addition to index calculations, the notebooks also defines masks for each index based on user defined thresholds.The notebooks combines the four masks into a resulting threshold map with identified areas of flood, shadow, vegetation and buildings. Additionally the accuracy score and confusion matrix are calculated using a reference data set. 
+These notebooks calculates spectral indices including the normalized difference water index (NDWI), morphological shadow index (MSI), normalized difference vegetation index (NDVI), and morphological building index (MBI). In addition to index calculations, the notebooks also defines masks for each index based on user defined thresholds. The notebooks combines the four masks into a resulting threshold map with identified areas of flood, shadow, vegetation and buildings. Additionally the accuracy score and confusion matrix are calculated using a reference data set. 
 
 #### outputs
 Output spectral index rasters (geoTIFF format) will be placed into  "../final_outputs/raster_files/" directory located within the area of interest imagery directory. This directory is created within each notebook. The notebooks write out each of the individual spectral indices as a geoTIFF to the specified outputs folder. Output thresholding results will be placed in "../explorations_outputs/threshold/" directory located within the imagery director. Each mask and the combined thresholded map is also written out as a geoTIFF. 
