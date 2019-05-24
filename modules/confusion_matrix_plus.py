@@ -8,12 +8,16 @@ and user's accuracy. '''
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+from sklearn.metrics import accuracy_score
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import cohen_kappa_score
 
 def plot_conf_matrix(ytrue, ypred, cmap=plt.cm.Blues):
     cm = confusion_matrix(ytrue,ypred)
     print(cm)
+    cm = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
+    print("")
+    print("Accuracy score:", accuracy_score(ytrue, ypred))
     print("")
     print("Kappa coefficient: ", cohen_kappa_score(ytrue, ypred))
     fig, ax = plt.subplots()
@@ -27,10 +31,11 @@ def plot_conf_matrix(ytrue, ypred, cmap=plt.cm.Blues):
          yticks=np.arange(4), yticklabels=['True \n Shadow',
                                            'True \n Flood',
                                            'True \n Vegetation',
-                                            'True \n Buildings'])
+                                            'True \n Buildings'],
+        title = "Normalized Confusion Matrix")
 
     # Loop over data dimensions and create text annotations.
-    fmt = 'd'
+    fmt = '.2f'
     thresh = cm.max() / 2.
     for i in range(cm.shape[0]):
         for j in range(cm.shape[1]):
@@ -41,10 +46,11 @@ def plot_conf_matrix(ytrue, ypred, cmap=plt.cm.Blues):
     plt.show()
     return ax
 
-def omission_error(cm, classes):
+def oc_error_up_accuracy(cm, classes):
     row_sum_list = []
     false_neg_list = []
     omission_error_list = []
+    producers_accuracy_list = []
     for i in range(4):
         row_sum=0
         for j in range(4):
@@ -56,13 +62,15 @@ def omission_error(cm, classes):
         false_neg_list.append(false_neg)
         omission_error = false_neg/row_sum
         omission_error_list.append(omission_error)
+        producers_accuracy = cm[a,a]/row_sum
+        producers_accuracy_list.append(producers_accuracy)
     omission_error_df = pd.DataFrame(list(zip(classes,omission_error_list)), columns = ['Class','Error of Omission'])
-    return omission_error_df
+    producers_accuracy_df = pd.DataFrame(list(zip(classes,producers_accuracy_list)), columns = ['Class','Producers Accuracy'])
 
-def comission_error(cm, classes):
     col_sum_list = []
     false_pos_list = []
     comission_error_list = []
+    users_accuracy_list = []
     for j in range(4):
         col_sum=0
         for i in range(4):
@@ -72,10 +80,16 @@ def comission_error(cm, classes):
         col_sum_list.append(col_sum)
         false_pos = col_sum-cm[a,a]
         false_pos_list.append(false_pos)
-        comission_error = false_neg/col_sum
-        comission_error_list.append(comissionError)
+        comission_error = false_pos/col_sum
+        comission_error_list.append(comission_error)
+        users_accuracy = cm[a,a]/col_sum
+        users_accuracy_list.append(users_accuracy)
+    users_accuracy_df = pd.DataFrame(list(zip(classes,users_accuracy_list)), columns = ['Class','Users Accuracy'])
     commission_error_df = pd.DataFrame(list(zip(classes,comission_error_list)), columns = ['Class','Error of Commission'])
-    return commission_error_df
+    error_df = pd.merge(commission_error_df, omission_error_df, on='Class',how='left')
+    accuracy_df = pd.merge(producers_accuracy_df, users_accuracy_df, on='Class',how='left')
+    error_accuracy_df = pd.merge(error_df,accuracy_df,on='Class',how='left')
+    return error_accuracy_df
 
 
 def producers_accuracy(cm, classes):
